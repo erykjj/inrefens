@@ -40,14 +40,14 @@ export function processElement(el: HTMLElement): void {
 
 function replaceTextNode(textNode: Text, text: string, citations: Citation[]): void {
     const sortedAscending = [...citations].sort((a, b) => a.start - b.start);
-    const fragment = activeDocument.createDocumentFragment();
+    const fragment = createFragment();
     let pos = 0;
 
     for (const citation of sortedAscending) {
         if (citation.start > pos) {
             fragment.appendChild(activeDocument.createTextNode(text.substring(pos, citation.start)));
         }
-        const anchor = activeDocument.createElement('a');
+        const anchor = createEl('a');
         anchor.className = 'inrefens-link';
         anchor.href = citation.wol_url;
         anchor.target = '_blank';
