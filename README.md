@@ -32,6 +32,8 @@ See [SECURITY](https://github.com/erykjj/inrefens?tab=security-ov-file).
 
 - **Desktop and mobile support**
 
+![preview](inREFens.gif)
+
 ---
 
 ## Settings
