@@ -11,15 +11,14 @@
 ### Removed
 
 ____
-## 0.9.1 - 2026-09-15
-### Changed
+## 1.0.0 - 2026-09-15
 
-- Fix linter warnings
+- Initial Obsidian Community release
 
 ## 0.9.0 - 2026-09-15
 
 - Initial *beta* release
 
 ____
-[0.9.1]:https://github.com/erykjj/inrefens/releases/tag/0.9.1
+[1.0.0]:https://github.com/erykjj/inrefens/releases/tag/1.0.0
 [0.9.0]:https://github.com/erykjj/inrefens/releases/tag/0.9.0
