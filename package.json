@@ -1,7 +1,7 @@
 {
   "name": "inrefens",
-  "version": "0.9.1",
-  "description": "Find references/citations to publications of Jehovah's Witnesses and link them to wol.jw.org",
+  "version": "1.0.0",
+  "description": "Find references/citations to publications of Jehovah's Witnesses and link them to wol.jw.org.",
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
