@@ -1,6 +1,6 @@
 {
   "name": "inrefens",
-  "version": "0.3.0",
+  "version": "0.9.0",
   "description": "Find references/citations to publications of Jehovah's Witnesses and link them to wol.jw.org",
   "main": "main.js",
   "scripts": {
