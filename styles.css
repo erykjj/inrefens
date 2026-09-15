@@ -6,6 +6,10 @@
   --inrefens-link-color: var(--link-external-color);
 }
 
+.inrefens-hidden {
+  display: none;
+}
+
 /* ────────────────────────────────────────────── */
 /* Citation links                                 */
 /* ────────────────────────────────────────────── */
