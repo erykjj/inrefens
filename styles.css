@@ -1,0 +1,62 @@
+/* ────────────────────────────────────────────── */
+/* Link color (overridable via settings)          */
+/* ────────────────────────────────────────────── */
+
+:root {
+  --inrefens-link-color: var(--link-external-color);
+}
+
+/* ────────────────────────────────────────────── */
+/* Citation links                                 */
+/* ────────────────────────────────────────────── */
+
+.inrefens-link {
+  color: var(--inrefens-link-color, var(--link-external-color));
+  text-decoration: none;
+  cursor: pointer;
+}
+.inrefens-link:hover {
+  text-decoration: underline;
+}
+
+/* ────────────────────────────────────────────── */
+/* Settings header                                */
+/* ────────────────────────────────────────────── */
+
+.inrefens-settings-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.inrefens-settings-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.inrefens-version-info {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+/* ────────────────────────────────────────────── */
+/* Settings footer                                */
+/* ────────────────────────────────────────────── */
+
+.inrefens-settings-footer {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--background-modifier-border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+.inrefens-settings-footer a {
+  color: var(--text-accent);
+  text-decoration: none;
+}
+.inrefens-settings-footer a:hover {
+  text-decoration: underline;
+}
