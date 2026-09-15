@@ -1,0 +1,20 @@
+{
+  "name": "inrefens",
+  "version": "0.3.0",
+  "description": "Find references/citations to publications of Jehovah's Witnesses and link them to wol.jw.org",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production"
+  },
+  "keywords": [],
+  "author": "Eryk J.",
+  "license": "MIT",
+  "devDependencies": {
+    "@codemirror/state": "6.5.0",
+    "@codemirror/view": "6.38.6",
+    "esbuild": "^0.28.1",
+    "obsidian": "1.13.1",
+    "typescript": "^5.5.0"
+  }
+}
