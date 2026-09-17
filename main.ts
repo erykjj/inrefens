@@ -38,7 +38,7 @@ export default class InrefensPlugin extends Plugin {
                 const query = el.getAttribute('data-inrefens-query');
                 if (!query) return;
                 const url = buildWolUrl(query);
-                if (url && el instanceof HTMLAnchorElement) {
+                if (url && el.instanceOf(HTMLAnchorElement)) {
                     el.href = url;
                 }
             });

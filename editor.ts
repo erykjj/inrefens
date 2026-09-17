@@ -94,7 +94,7 @@ export function createInrefensEditorPlugin() {
                 mousedown: (e: MouseEvent, _view: EditorView) => {
                     if (e.button !== 0) return;
                     const target = e.target as HTMLElement;
-                    const linkEl = target.closest('.inrefens-link') as HTMLElement | null;
+                    const linkEl = target.closest('.inrefens-link');
                     if (!linkEl) return;
                     const query = linkEl.getAttribute('data-inrefens-query');
                     if (!query) return;
