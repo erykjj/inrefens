@@ -4,9 +4,10 @@
 
 ### Added
 
-- Handle paragraph numbers (`w24.10 20 9` or `w24.10 20/9`)
-
 ### Changed
+- Updated engine to v2.2.0
+  - Handle paragraph numbers (`w24.10 20 9` or `w24.10 20/9`)
+- Various tweaks and improvements
 
 ### Fixed
 
