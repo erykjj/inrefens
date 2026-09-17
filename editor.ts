@@ -47,6 +47,7 @@ export function createInrefensEditorPlugin() {
         class {
             decorations: DecorationSet;
             private debounceTimer: number | null = null;
+            private viewportTimer: number | null = null;
 
             constructor(view: EditorView) {
                 this.decorations = buildDecorations(view);
@@ -54,11 +55,17 @@ export function createInrefensEditorPlugin() {
 
             update(update: ViewUpdate) {
                 if (update.viewportChanged) {
-                    this.decorations = buildDecorations(update.view);
+                    if (this.viewportTimer !== null) {
+                        window.clearTimeout(this.viewportTimer);
+                    }
+                    const view = update.view;
+                    this.viewportTimer = window.setTimeout(() => {
+                        this.viewportTimer = null;
+                        this.decorations = buildDecorations(view);
+                    }, 75);
                     return;
                 }
                 if (update.docChanged || update.selectionSet) {
-                    // Debounce typing and cursor movement.
                     if (this.debounceTimer !== null) {
                         window.clearTimeout(this.debounceTimer);
                     }
@@ -74,6 +81,10 @@ export function createInrefensEditorPlugin() {
                 if (this.debounceTimer !== null) {
                     window.clearTimeout(this.debounceTimer);
                     this.debounceTimer = null;
+                }
+                if (this.viewportTimer !== null) {
+                    window.clearTimeout(this.viewportTimer);
+                    this.viewportTimer = null;
                 }
             }
         },
