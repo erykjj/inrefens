@@ -48,6 +48,8 @@ export interface CitationParts {
     day?: number | null;
     page?: number | null;
     end_page?: number | null;
+    paragraph?: number | null;
+    end_paragraph?: number | null;
     volume?: number | null;
     title?: string | null;
 }
