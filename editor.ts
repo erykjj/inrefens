@@ -62,6 +62,7 @@ export function createInrefensEditorPlugin() {
                     this.viewportTimer = window.setTimeout(() => {
                         this.viewportTimer = null;
                         this.decorations = buildDecorations(view);
+                        view.dispatch({});
                     }, 75);
                     return;
                 }
@@ -73,6 +74,7 @@ export function createInrefensEditorPlugin() {
                     this.debounceTimer = window.setTimeout(() => {
                         this.debounceTimer = null;
                         this.decorations = buildDecorations(view);
+                        view.dispatch({});
                     }, 150);
                 }
             }
