@@ -6,6 +6,9 @@
 
 ### Changed
 
+- Include Bibles
+- Improved hadling of upper-case roots
+
 ### Fixed
 
 ### Removed
