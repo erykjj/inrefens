@@ -6,8 +6,11 @@
 
 ### Changed
 
-- Include Bibles
-- Improved hadling of upper-case roots
+- Updated engine to v2.1.0
+  - Include Bibles
+  - Improved hadling of upper-case roots
+  - Handle Watchtower Library style references (`*** w24 October p. 20 par. 9 Title ***`)
+- Various tweaks and improvements
 
 ### Fixed
 
