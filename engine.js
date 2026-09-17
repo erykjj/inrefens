@@ -12,6 +12,46 @@ export class InrefensEngine {
         wasm.__wbg_inrefensengine_free(ptr, 0);
     }
     /**
+     * Given the plain text content of a delimited element, return the WOL
+     * URL for the citation it contains, or an empty string.
+     * @param {string} text
+     * @returns {string}
+     */
+    build_delimited_url(text) {
+        let deferred2_0;
+        let deferred2_1;
+        try {
+            const ptr0 = passStringToWasm0(text, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len0 = WASM_VECTOR_LEN;
+            const ret = wasm.inrefensengine_build_delimited_url(this.__wbg_ptr, ptr0, len0);
+            deferred2_0 = ret[0];
+            deferred2_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+        }
+    }
+    /**
+     * Build the WOL search URL for a raw query string in the engine's
+     * configured language.
+     * @param {string} query
+     * @returns {string}
+     */
+    build_wol_url_for_query(query) {
+        let deferred2_0;
+        let deferred2_1;
+        try {
+            const ptr0 = passStringToWasm0(query, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len0 = WASM_VECTOR_LEN;
+            const ret = wasm.inrefensengine_build_wol_url_for_query(this.__wbg_ptr, ptr0, len0);
+            deferred2_0 = ret[0];
+            deferred2_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+        }
+    }
+    /**
      * Find all publication citations in `text`.
      * Returns a JSON array of match objects, each with:
      *   { text, start, end, family, root, parts, wol_url }
@@ -46,6 +86,26 @@ export class InrefensEngine {
             return getStringFromWasm0(ret[0], ret[1]);
         } finally {
             wasm.__wbindgen_free(deferred1_0, deferred1_1, 1);
+        }
+    }
+    /**
+     * Return the truncated citation query for a delimited element's inner
+     * text, or an empty string.
+     * @param {string} text
+     * @returns {string}
+     */
+    get_delimited_query(text) {
+        let deferred2_0;
+        let deferred2_1;
+        try {
+            const ptr0 = passStringToWasm0(text, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+            const len0 = WASM_VECTOR_LEN;
+            const ret = wasm.inrefensengine_get_delimited_query(this.__wbg_ptr, ptr0, len0);
+            deferred2_0 = ret[0];
+            deferred2_1 = ret[1];
+            return getStringFromWasm0(ret[0], ret[1]);
+        } finally {
+            wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
         }
     }
     /**
