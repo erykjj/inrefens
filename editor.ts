@@ -2,7 +2,7 @@
 
 import { ViewPlugin, EditorView, Decoration, DecorationSet, ViewUpdate } from '@codemirror/view';
 import { RangeSetBuilder } from '@codemirror/state';
-import { findCitations } from './engine-wrapper';
+import { findCitations, buildWolUrl } from './engine-wrapper';
 
 interface DecoEntry {
     from: number;
@@ -21,13 +21,14 @@ function buildDecorations(view: EditorView): DecorationSet {
         for (const citation of citations) {
             const docFrom = from + citation.start;
             const docTo = from + citation.end;
+            const query = citation.parts?.query || '';
 
             allDecos.push({
                 from: docFrom,
                 to: docTo,
                 deco: Decoration.mark({
                     class: 'inrefens-link',
-                    attributes: { 'data-inrefens-url': citation.wol_url },
+                    attributes: { 'data-inrefens-query': query },
                 }),
             });
         }
@@ -45,14 +46,34 @@ export function createInrefensEditorPlugin() {
     return ViewPlugin.fromClass(
         class {
             decorations: DecorationSet;
+            private debounceTimer: number | null = null;
 
             constructor(view: EditorView) {
                 this.decorations = buildDecorations(view);
             }
 
             update(update: ViewUpdate) {
-                if (update.docChanged || update.viewportChanged) {
+                if (update.viewportChanged) {
                     this.decorations = buildDecorations(update.view);
+                    return;
+                }
+                if (update.docChanged || update.selectionSet) {
+                    // Debounce typing and cursor movement.
+                    if (this.debounceTimer !== null) {
+                        window.clearTimeout(this.debounceTimer);
+                    }
+                    const view = update.view;
+                    this.debounceTimer = window.setTimeout(() => {
+                        this.debounceTimer = null;
+                        this.decorations = buildDecorations(view);
+                    }, 150);
+                }
+            }
+
+            destroy() {
+                if (this.debounceTimer !== null) {
+                    window.clearTimeout(this.debounceTimer);
+                    this.debounceTimer = null;
                 }
             }
         },
@@ -62,9 +83,11 @@ export function createInrefensEditorPlugin() {
                 mousedown: (e: MouseEvent, _view: EditorView) => {
                     if (e.button !== 0) return;
                     const target = e.target as HTMLElement;
-                    const linkEl = target.closest('.inrefens-link');
+                    const linkEl = target.closest('.inrefens-link') as HTMLElement | null;
                     if (!linkEl) return;
-                    const url = linkEl.getAttribute('data-inrefens-url');
+                    const query = linkEl.getAttribute('data-inrefens-query');
+                    if (!query) return;
+                    const url = buildWolUrl(query);
                     if (!url) return;
                     e.preventDefault();
                     e.stopPropagation();

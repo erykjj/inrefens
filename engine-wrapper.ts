@@ -94,6 +94,33 @@ export function findCitations(text: string): Citation[] | null {
     }
 }
 
+export function buildDelimitedUrl(text: string): string {
+    if (!engineInstance) return '';
+    try {
+        return engineInstance.build_delimited_url(text);
+    } catch {
+        return '';
+    }
+}
+
+export function getDelimitedQuery(text: string): string {
+    if (!engineInstance) return '';
+    try {
+        return engineInstance.get_delimited_query(text);
+    } catch {
+        return '';
+    }
+}
+
+export function buildWolUrl(query: string): string {
+    if (!engineInstance) return '';
+    try {
+        return engineInstance.build_wol_url_for_query(query);
+    } catch {
+        return '';
+    }
+}
+
 export function getEngineVersion(): string {
     if (!engineInitialized) return 'Engine not initialized';
     try {

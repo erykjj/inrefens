@@ -2,7 +2,7 @@
 
 import { Plugin } from 'obsidian';
 import { createInrefensEditorPlugin } from './editor';
-import { initEngine, isEngineReady, resetEngine } from './engine-wrapper';
+import { initEngine, isEngineReady, resetEngine, buildWolUrl } from './engine-wrapper';
 import { processElement } from './post-processor';
 import { InrefensSettingTab } from './settings';
 import { DEFAULT_SETTINGS, InrefensSettings } from './types';
@@ -25,7 +25,24 @@ export default class InrefensPlugin extends Plugin {
             await initEngine(this.app, this.settings.language);
         } catch (e) {
             console.error('in(REF)ens: engine re-initialization failed:', e);
+            return;
         }
+        this.refreshReadingViewLinks();
+    }
+
+    private refreshReadingViewLinks(): void {
+        this.app.workspace.iterateAllLeaves(leaf => {
+            const container = leaf.view.containerEl;
+            if (!container) return;
+            container.querySelectorAll('.inrefens-link[data-inrefens-query]').forEach(el => {
+                const query = el.getAttribute('data-inrefens-query');
+                if (!query) return;
+                const url = buildWolUrl(query);
+                if (url && el instanceof HTMLAnchorElement) {
+                    el.href = url;
+                }
+            });
+        });
     }
 
     applyLinkColor(): void {
