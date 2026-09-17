@@ -4,6 +4,8 @@
 
 ### Added
 
+- Handle paragraph numbers (`w24.10 20 9` or `w24.10 20/9`)
+
 ### Changed
 
 ### Fixed
