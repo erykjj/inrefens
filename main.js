@@ -563,11 +563,19 @@ function createInrefensEditorPlugin() {
     class {
       constructor(view) {
         this.debounceTimer = null;
+        this.viewportTimer = null;
         this.decorations = buildDecorations(view);
       }
       update(update) {
         if (update.viewportChanged) {
-          this.decorations = buildDecorations(update.view);
+          if (this.viewportTimer !== null) {
+            window.clearTimeout(this.viewportTimer);
+          }
+          const view = update.view;
+          this.viewportTimer = window.setTimeout(() => {
+            this.viewportTimer = null;
+            this.decorations = buildDecorations(view);
+          }, 75);
           return;
         }
         if (update.docChanged || update.selectionSet) {
@@ -585,6 +593,10 @@ function createInrefensEditorPlugin() {
         if (this.debounceTimer !== null) {
           window.clearTimeout(this.debounceTimer);
           this.debounceTimer = null;
+        }
+        if (this.viewportTimer !== null) {
+          window.clearTimeout(this.viewportTimer);
+          this.viewportTimer = null;
         }
       }
     },
