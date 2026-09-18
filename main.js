@@ -536,6 +536,7 @@ var SMALL_CHANGE_MAX_LINES = 5;
 var LINE_MARGIN = 1;
 var DEBOUNCE_MS = 150;
 var VIEWPORT_DEBOUNCE_MS = 75;
+var MAX_RESCAN_BYTES = 4096;
 var fullRescanRequested = false;
 function requestInrefensFullRescan() {
   fullRescanRequested = true;
@@ -576,7 +577,6 @@ function buildDecorationsForVisibleRanges(view) {
   }
   return buildDecorationSet(allDecos);
 }
-var MAX_RESCAN_BYTES = 4096;
 function computeRescanTarget(update) {
   const { changes, startState, state } = update;
   if (changes.empty) {
@@ -620,8 +620,6 @@ function createInrefensEditorPlugin() {
       constructor(view) {
         this.debounceTimer = null;
         this.viewportTimer = null;
-        /// Range the pending debounced callback should rescan. null
-        /// means "full visible-range rebuild".
         this.pendingTarget = null;
         this.decorations = buildDecorationsForVisibleRanges(view);
       }
@@ -691,11 +689,7 @@ function createInrefensEditorPlugin() {
               if (iter.to > coveredTo) coveredTo = iter.to;
               iter.next();
             }
-            const fullyCovered = Number.isFinite(coveredFrom) && Number.isFinite(coveredTo) && bounds.from >= coveredFrom && bounds.to <= coveredTo && // A single decoration span isn't "coverage"; require
-            // that the visible range is intersected by at least
-            // one decoration OR is inside a reasonable margin
-            // of one. Simpler: just rebuild.
-            false;
+            const fullyCovered = Number.isFinite(coveredFrom) && Number.isFinite(coveredTo) && bounds.from >= coveredFrom && bounds.to <= coveredTo && false;
             if (!fullyCovered) {
               this.decorations = buildDecorationsForVisibleRanges(view);
               view.dispatch({});
