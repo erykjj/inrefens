@@ -1,7 +1,7 @@
 // main.ts
 
-import { Plugin } from 'obsidian';
-import { createInrefensEditorPlugin } from './editor';
+import { Plugin, MarkdownView } from 'obsidian';
+import { createInrefensEditorPlugin, requestInrefensFullRescan } from './editor';
 import { initEngine, isEngineReady, resetEngine, buildWolUrl } from './engine-wrapper';
 import { processElement } from './post-processor';
 import { InrefensSettingTab } from './settings';
@@ -28,6 +28,20 @@ export default class InrefensPlugin extends Plugin {
             return;
         }
         this.refreshReadingViewLinks();
+        this.refreshEditorDecorations();
+    }
+
+    private refreshEditorDecorations(): void {
+        requestInrefensFullRescan();
+        this.app.workspace.iterateAllLeaves(leaf => {
+            const view = leaf.view;
+            if (!(view instanceof MarkdownView)) return;
+            const editorView = (view.editor as unknown as { cm?: unknown }).cm;
+            const cmView = editorView as { dispatch?: (spec: unknown) => void } | undefined;
+            if (cmView?.dispatch) {
+                cmView.dispatch({});
+            }
+        });
     }
 
     private refreshReadingViewLinks(): void {
