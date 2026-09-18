@@ -11,6 +11,11 @@
 ### Removed
 
 ____
+## 2.1.0 - 2026-09-18
+### Changed
+- Updated engine to v2.3.0
+  - Optimize scanning
+
 ## 2.0.0 - 2026-09-17
 ### Changed
 - Updated engine to v2.2.0
@@ -38,6 +43,8 @@ ____
 - Initial *beta* release
 
 ____
+[2.1.0]:https://github.com/erykjj/inrefens/releases/tag/2.1.0
+[2.0.0]:https://github.com/erykjj/inrefens/releases/tag/2.0.0
 [1.1.0]:https://github.com/erykjj/inrefens/releases/tag/1.1.0
 [1.0.0]:https://github.com/erykjj/inrefens/releases/tag/1.0.0
 [0.9.0]:https://github.com/erykjj/inrefens/releases/tag/0.9.0
