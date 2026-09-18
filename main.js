@@ -609,11 +609,6 @@ function computeRescanTarget(update) {
   }
   return { from: fromPos, to: toPos, full: false };
 }
-function visibleBounds(view) {
-  const ranges = view.visibleRanges;
-  if (ranges.length === 0) return null;
-  return { from: ranges[0].from, to: ranges[ranges.length - 1].to };
-}
 function createInrefensEditorPlugin() {
   return import_view.ViewPlugin.fromClass(
     class {
@@ -672,28 +667,14 @@ function createInrefensEditorPlugin() {
             this.debounceTimer = null;
             this.pendingTarget = null;
           }
-          const bounds = visibleBounds(update.view);
-          if (!bounds) return;
           if (this.viewportTimer !== null) {
             window.clearTimeout(this.viewportTimer);
           }
           const view = update.view;
           this.viewportTimer = window.setTimeout(() => {
             this.viewportTimer = null;
-            const decos = this.decorations;
-            let coveredFrom = Number.POSITIVE_INFINITY;
-            let coveredTo = Number.NEGATIVE_INFINITY;
-            const iter = decos.iter();
-            while (iter.value) {
-              if (iter.from < coveredFrom) coveredFrom = iter.from;
-              if (iter.to > coveredTo) coveredTo = iter.to;
-              iter.next();
-            }
-            const fullyCovered = Number.isFinite(coveredFrom) && Number.isFinite(coveredTo) && bounds.from >= coveredFrom && bounds.to <= coveredTo && false;
-            if (!fullyCovered) {
-              this.decorations = buildDecorationsForVisibleRanges(view);
-              view.dispatch({});
-            }
+            this.decorations = buildDecorationsForVisibleRanges(view);
+            view.dispatch({});
           }, VIEWPORT_DEBOUNCE_MS);
         }
       }
