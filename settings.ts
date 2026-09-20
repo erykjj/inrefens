@@ -35,7 +35,7 @@ export class InrefensSettingTab extends PluginSettingTab {
         headerEl.createSpan({ text: 'in(REF)ens', cls: 'inrefens-settings-title' });
         const engineVersion = getEngineVersion();
         headerEl.createSpan({
-            text: `v${this.plugin.manifest.version} – ${engineVersion}`,
+            text: `v${this.plugin.manifest.version} – ${engineVersion}`,
             cls: 'inrefens-version-info',
         });
 
@@ -116,7 +116,7 @@ export class InrefensSettingTab extends PluginSettingTab {
         // ──────────────────────────────────────────
         const footerEl = containerEl.createDiv({ cls: 'inrefens-settings-footer' });
         const footerText = footerEl.createSpan();
-        footerText.appendChild(activeDocument.createTextNode('My other Obsidian plugins: '));
+        footerText.appendChild(activeDocument.createTextNode('My other Obsidian plugins: '));
 
         const travertureStrong = footerText.createEl('strong');
         const travertureLink = travertureStrong.createEl('a', {
