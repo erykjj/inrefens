@@ -6,6 +6,9 @@
 
 ### Changed
 
+- Updated engine to v2.4.0
+  - Handle ¶ character
+
 ### Fixed
 
 ### Removed
@@ -13,11 +16,13 @@
 ____
 ## 2.1.1 - 2026-09-18
 ### Changed
+
 - Updated engine to v2.3.0
   - Optimize scanning
 
 ## 2.0.0 - 2026-09-17
 ### Changed
+
 - Updated engine to v2.2.0
   - Handle paragraph numbers (`w24.10 20 9` or `w24.10 20/9`)
   - Include Bibles
