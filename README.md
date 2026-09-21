@@ -73,4 +73,5 @@ Feel free to get in touch and post any [issues and/or suggestions](https://githu
 My other Obsidian plugins:
 
 - **con[VER]sum**: [GitHub repo](https://github.com/erykjj/conversum), [Obsidian Community](https://community.obsidian.md/plugins/conversum)
+- **mu/TEX/tum**: [GitHub repo](https://github.com/erykjj/mutextum), [Obsidian Community](https://community.obsidian.md/plugins/mutextum)
 - **tra.VER:ture**: [GitHub repo](https://github.com/erykjj/traverture), [Obsidian Community](https://community.obsidian.md/plugins/traverture)
