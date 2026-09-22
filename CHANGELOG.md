@@ -9,6 +9,7 @@
 - Updated engine to v3.0.0
   - Support the ¶ character before paragraph numbers (e.g. `w21.03 3 ¶6`)
   - Support `*` and `**` markup within a citation (e.g. `*wp16.5* 13`)
+  - Handle different types of quotes (e.g. straight double quotes (`"Eliab"`), curly quotes (`“Eliab”` or `‘Eliab’`), or guillemets (`«Eliab»`))
 
 ### Fixed
 
