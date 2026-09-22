@@ -118,16 +118,6 @@ export class InrefensSettingTab extends PluginSettingTab {
         const footerText = footerEl.createSpan();
         footerText.appendChild(activeDocument.createTextNode('My other Obsidian plugins: '));
 
-        const travertureStrong = footerText.createEl('strong');
-        const travertureLink = travertureStrong.createEl('a', {
-            text: 'tra.VER:ture',
-            href: 'https://github.com/erykjj/traverture',
-        });
-        travertureLink.setAttribute('target', '_blank');
-        travertureLink.setAttribute('rel', 'noopener noreferrer');
-
-        footerText.appendChild(activeDocument.createTextNode(', '));
-
         const conversumStrong = footerText.createEl('strong');
         const conversumLink = conversumStrong.createEl('a', {
             text: 'con[VER]sum',
@@ -135,5 +125,25 @@ export class InrefensSettingTab extends PluginSettingTab {
         });
         conversumLink.setAttribute('target', '_blank');
         conversumLink.setAttribute('rel', 'noopener noreferrer');
+
+        footerText.appendChild(activeDocument.createTextNode(', '));
+
+        const mutextumStrong = footerText.createEl('strong');
+        const mutextumLink = mutextumStrong.createEl('a', {
+            text: 'mu/TEX/tum',
+            href: 'https://github.com/erykjj/mutextum',
+        });
+        mutextumLink.setAttribute('target', '_blank');
+        mutextumLink.setAttribute('rel', 'noopener noreferrer');
+
+        footerText.appendChild(activeDocument.createTextNode(', '));
+
+        const travertureStrong = footerText.createEl('strong');
+        const travertureLink = travertureStrong.createEl('a', {
+            text: 'tra.VER:ture',
+            href: 'https://github.com/erykjj/traverture',
+        });
+        travertureLink.setAttribute('target', '_blank');
+        travertureLink.setAttribute('rel', 'noopener noreferrer');
     }
 }
