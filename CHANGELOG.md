@@ -11,7 +11,7 @@
 ### Removed
 
 ____
-## 3.0.0 - 2026-09-22
+## 3.0.1 - 2026-09-22
 ### Changed
 
 - Updated engine to v3.0.0
@@ -53,7 +53,7 @@ ____
 - Initial *beta* release
 
 ____
-[3.0.0]:https://github.com/erykjj/inrefens/releases/tag/3.0.0
+[3.0.1]:https://github.com/erykjj/inrefens/releases/tag/3.0.1
 [2.1.1]:https://github.com/erykjj/inrefens/releases/tag/2.1.1
 [2.0.0]:https://github.com/erykjj/inrefens/releases/tag/2.0.0
 [1.1.0]:https://github.com/erykjj/inrefens/releases/tag/1.1.0
