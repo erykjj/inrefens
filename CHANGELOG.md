@@ -6,8 +6,9 @@
 
 ### Changed
 
-- Updated engine to v2.4.0
-  - Handle ¶ character
+- Updated engine to v3.0.0
+  - Support the ¶ character before paragraph numbers (e.g. `w21.03 3 ¶6`)
+  - Support `*` and `**` markup within a citation (e.g. `*wp16.5* 13`)
 
 ### Fixed
 
