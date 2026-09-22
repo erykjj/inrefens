@@ -125,7 +125,7 @@ function replaceRunRange(run: RunChild[], from: number, to: number, url: string,
     const parent = first.node.parentNode;
     if (!parent) return;
 
-    const fragment = activeDocument.createDocumentFragment();
+    const fragment = createFragment();
 
     for (const rc of run) {
         const rcEnd = rc.start + rc.text.length;
@@ -208,7 +208,7 @@ function collectBlockElements(root: HTMLElement): HTMLElement[] {
     const walk = (node: HTMLElement) => {
         out.push(node);
         for (const child of Array.from(node.children)) {
-            if (child instanceof HTMLElement) walk(child);
+            if (child.instanceOf(HTMLElement)) walk(child);
         }
     };
     walk(root);
