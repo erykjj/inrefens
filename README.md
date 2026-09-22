@@ -14,9 +14,9 @@ See [SECURITY](https://github.com/erykjj/inrefens?tab=security-ov-file).
 
 ## Features
 
-- **Automatic citation detection** – Publication citations are automatically detected in both Reading View and Live Preview (Edit mode), and updated as you type. Recognized roots include *The Watchtower* (`w`, `ws`, `wp`), *Awake!* (`g`), *Kingdom Ministry* (`km`), *Meeting Workbook* (`mwb`), *Insight on the Scriptures* (`it-1`, `it-2`), and hundreds of books, brochures, tracts, and online article series.
+- **Automatic citation detection** – Publication citations are automatically detected in both Reading View and Live Preview (Edit mode), and updated as you type. Recognized roots include *The Watchtower* (`w`, `ws`, `wp`), *Awake!* (`g`), *Kingdom Ministry* (`km`), *Meeting Workbook* (`mwb`), *Insight on the Scriptures* (`it-1`, `it-2`), and hundreds of books, brochures, tracts, and online article series
 
-- **Interactive links** – Every detected citation becomes a clickable link. Clicking opens the result of the search for the citation on [*wol.jw.org*](https://wol.jw.org).
+- **Interactive links** – Every detected citation becomes a clickable link. Clicking opens the result of the search for the citation on [*wol.jw.org*](https://wol.jw.org)
 
 - **Flexible citation forms** – Accepts a wide range of user-written variants:
   - Glued or separated years: `w15 2/15`, `w 15 2/15`, `w2015 2/15`, `w 4/2026`
@@ -28,7 +28,7 @@ See [SECURITY](https://github.com/erykjj/inrefens?tab=security-ov-file).
 - **Multi-language support** – Links open in your chosen language on *wol.jw.org*.
   - Supported languages: ASL, Cebuano, Chinese (Simplified Mandarin), Danish, Dutch, English, Estonian, Finnish, French, German, Haitian Creole, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil and Portugal), Romanian, Russian, Spanish, Swedish, Tagalog, Ukrainian
 
-- **Configurable link color** – Choose from presets or enter a custom hex value. Changing the color requires restarting Obsidian.
+- **Configurable link color** – Choose from presets or enter a custom hex value; changing the color requires restarting Obsidian
 
 - **Desktop and mobile support**
 
@@ -39,15 +39,15 @@ See [SECURITY](https://github.com/erykjj/inrefens?tab=security-ov-file).
 ## Settings
 
 - **Language** – Language for *wol.jw.org* links
-- **Link color** – Color for citation links. "Theme default" uses the vault's external-link color. Presets and a custom hex option are provided. Changing this requires restarting Obsidian.
+- **Link color** – Color for citation links; "Theme default" uses the vault's external-link color; presets and a custom hex option are provided; changing this requires restarting Obsidian
 
 ---
 
 ## Known Limitations
 
-- **Citations split by inline markup** are not detected. For example, `w26.**4** 12` (with bold inside the citation) will not link, because the markup splits the text into separate nodes. Write the citation without inline markup (`w26.4 12`) or apply the markup around the whole citation (`**w26.4 12**`).
+- In Edit mode, a citation that includes markup (e.g. `*wp16.5* 13`) renders as adjacent links rather than one link (Obsidian limitation); however, each link contains the URL for the whole citation
 
-- If you encounter a publication root that doesn't link, please [open an issue](https://github.com/erykjj/inrefens/issues).
+- If you encounter a publication root that doesn't link, please [open an issue](https://github.com/erykjj/inrefens/issues)
 
 ---
 
@@ -61,7 +61,7 @@ Detection runs on visible text only and is fast even on large documents. Changin
 
 1. In your vault's `.obsidian/plugins/` directory, make a directory (folder) called `inrefens`, if you don't already have one
 2. Download [main.js](https://github.com/erykjj/inrefens/releases/latest/download/main.js), [styles.css](https://github.com/erykjj/inrefens/releases/latest/download/styles.css), [manifest.json](https://github.com/erykjj/inrefens/releases/latest/download/manifest.json)
-3. If not already enabled, enable the plugin in Obsidian Settings → Community plugins
+3. If not already enabled, enable `in(REF)ens` in Obsidian Settings → Community plugins
 4. Configure the language in the plugin settings (if installing for the first time); defaults to English
 
 ---
