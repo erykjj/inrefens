@@ -35,7 +35,7 @@ export class InrefensSettingTab extends PluginSettingTab {
         headerEl.createSpan({ text: 'in(REF)ens', cls: 'inrefens-settings-title' });
         const engineVersion = getEngineVersion();
         headerEl.createSpan({
-            text: `v${this.plugin.manifest.version} – ${engineVersion}`,
+            text: `v${this.plugin.manifest.version} – ${engineVersion}`,
             cls: 'inrefens-version-info',
         });
 
