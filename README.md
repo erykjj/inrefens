@@ -47,6 +47,10 @@ See [SECURITY](https://github.com/erykjj/inrefens?tab=security-ov-file).
 
 - In Edit mode, a citation that includes markup (e.g. `*wp16.5* 13`) renders as adjacent links rather than one link (Obsidian limitation); however, each link contains the URL for the whole citation
 
+- A bare `it` (without `-1` or `-2`) is not linked; *Insight on the Scriptures* has two volumes, and the volume must be specified to disambiguate; otherwise, the root would be too open to false positives (e.g. "it 'a house'")
+
+- Straight single quotes (`'...'`) are not accepted as title delimiters for `it-1` and `it-2` citations; use straight double quotes (`"Eliab"`), curly quotes (`“Eliab”` or `‘Eliab’`), or guillemets (`«Eliab»`)
+
 - If you encounter a publication root that doesn't link, please [open an issue](https://github.com/erykjj/inrefens/issues)
 
 ---
