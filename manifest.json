@@ -1,8 +1,8 @@
 {
   "id": "inrefens",
   "name": "inREFens",
-  "version": "3.1.0",
-  "minAppVersion": "1.10.0",
+  "version": "3.2.0",
+  "minAppVersion": "1.13.0",
   "description": "Find references/citations to publications of Jehovah's Witnesses and link them to wol.jw.org.",
   "author": "Eryk J.",
   "authorUrl": "https://github.com/erykjj",
