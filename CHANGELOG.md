@@ -6,13 +6,17 @@
 
 ### Changed
 
-- Adapt to declarative settings API
-
 ### Fixed
 
 ### Removed
 
 ____
+## 3.2.0 - 2026-10-08
+### Changed
+
+- Adapt to declarative settings API
+- Don't link text that is arleady-linked (for example, by tra.VER:ture)
+
 ## 3.1.0 - 2026-10-05
 ### Changed
 
@@ -62,6 +66,7 @@ ____
 - Initial *beta* release
 
 ____
+[3.2.0]:https://github.com/erykjj/inrefens/releases/tag/3.2.0
 [3.1.0]:https://github.com/erykjj/inrefens/releases/tag/3.1.0
 [3.0.1]:https://github.com/erykjj/inrefens/releases/tag/3.0.1
 [2.1.1]:https://github.com/erykjj/inrefens/releases/tag/2.1.1
