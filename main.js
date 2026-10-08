@@ -712,12 +712,17 @@ function createInrefensEditorPlugin() {
 
 // post-processor.ts
 function processElement(el) {
+  if (isInsideAnchor(el)) return;
   if (el.querySelector(".callout, svg")) return;
   if (el.classList.contains("inrefens-processed")) return;
   el.classList.add("inrefens-processed");
   handleDelimitedElements(el);
   processInlineRuns(el);
   processTextNodes(el);
+}
+function isInsideAnchor(node) {
+  const el = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+  return !!el?.closest("a");
 }
 function handleDelimitedElements(el) {
   const candidates = [];
@@ -763,6 +768,7 @@ function collectRun(children, startIndex) {
     }
     if (child.nodeType === Node.ELEMENT_NODE) {
       const elem = child;
+      if (isInsideAnchor(elem)) break;
       if (elem.classList.contains("inrefens-link")) break;
       if (isDisqualifying(elem.tagName)) return null;
       if (!isInlineContainer(elem.tagName)) break;
@@ -883,6 +889,10 @@ function processBlockElement(block) {
     const child = children[i];
     if (child.nodeType === Node.ELEMENT_NODE) {
       const elem = child;
+      if (isInsideAnchor(elem)) {
+        i++;
+        continue;
+      }
       if (elem.classList.contains("inrefens-link")) {
         i++;
         continue;
