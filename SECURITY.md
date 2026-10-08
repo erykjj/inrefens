@@ -8,6 +8,18 @@ This plugin does not make any network requests of its own. When you click a cita
 
 ---
 
+## File Access
+
+### What the plugin does:
+- **Reads note text** in Reading View and Live Preview, to detect citations and render them as links
+
+### What the plugin does not do:
+- Modify or delete your files
+- Access files outside your vault
+- Transmit note content anywhere
+
+---
+
 ## Privacy
 
 **No data is collected, stored, or transmitted.** The plugin reads only the text of your notes, in memory, to detect citations. The plugin never reads or writes the system clipboard.
@@ -22,9 +34,3 @@ The WASM module:
 - Does not make any network requests
 - Does not access the file system
 - Does not read or modify DOM directly
-
----
-
-## TypeScript Warnings
-
-The plugin source contains some TypeScript strictness warnings inherent to JavaScript interop (e.g., `JSON.parse` returning `any`, WASM module type casting). **These warnings are cosmetic and do not affect functionality or security**.
