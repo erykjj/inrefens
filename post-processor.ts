@@ -4,12 +4,20 @@ import { findCitations, buildDelimitedUrl, getDelimitedQuery } from './engine-wr
 import { Citation } from './types';
 
 export function processElement(el: HTMLElement): void {
+    if (isInsideAnchor(el)) return;
     if (el.querySelector('.callout, svg')) return;
     if (el.classList.contains('inrefens-processed')) return;
     el.classList.add('inrefens-processed');
     handleDelimitedElements(el);
     processInlineRuns(el);
     processTextNodes(el);
+}
+
+function isInsideAnchor(node: Node): boolean {
+    const el = node.nodeType === Node.ELEMENT_NODE
+        ? node as Element
+        : node.parentElement;
+    return !!el?.closest('a');
 }
 
 // ──────────────────────────────────────────────
@@ -81,6 +89,7 @@ function collectRun(children: Node[], startIndex: number): { children: RunChild[
         if (child.nodeType === Node.ELEMENT_NODE) {
             const elem = child as HTMLElement;
 
+            if (isInsideAnchor(elem)) break;
             if (elem.classList.contains('inrefens-link')) break;
             if (isDisqualifying(elem.tagName)) return null;
             if (!isInlineContainer(elem.tagName)) break;
@@ -224,6 +233,7 @@ function processBlockElement(block: HTMLElement): void {
 
         if (child.nodeType === Node.ELEMENT_NODE) {
             const elem = child as HTMLElement;
+            if (isInsideAnchor(elem)) { i++; continue; }
             if (elem.classList.contains('inrefens-link')) { i++; continue; }
             if (isDisqualifying(elem.tagName)) { i++; continue; }
             if (!isInlineContainer(elem.tagName)) { i++; continue; }
