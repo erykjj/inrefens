@@ -6,6 +6,10 @@
 
 ### Changed
 
+- Check if tra.VER:ture is enabled
+- Updated engine to v3.2.0
+  - Avoid potential conflicts with tra.VER:ture (e.g. "Re 22:1" being linked by both)
+
 ### Fixed
 
 ### Removed
