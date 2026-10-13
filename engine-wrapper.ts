@@ -60,13 +60,21 @@ export async function initEngine(app: App, language: string): Promise<void> {
     const generatedHash = await checkHealth(app);
     await wasmModule.default({ module_or_path: wasmBinary });
 
-    const instance = new wasmModule.InrefensEngine(language);
+    const travertureEnabled = isPluginEnabled(app, 'traverture');
+    const instance = new wasmModule.InrefensEngine(language, travertureEnabled);
     if (!instance.verify_integrity(generatedHash)) {
         throw new Error('in(REF)ens: integrity check FAILED!');
     }
 
     engineInstance = instance;
     engineInitialized = true;
+}
+
+function isPluginEnabled(app: App, pluginId: string): boolean {
+    const plugins = (app as unknown as {
+        plugins?: { enabledPlugins?: Set<string> };
+    }).plugins;
+    return plugins?.enabledPlugins?.has(pluginId) ?? false;
 }
 
 export function isEngineReady(): boolean {
