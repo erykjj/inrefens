@@ -158,11 +158,12 @@ export class InrefensEngine {
     }
     /**
      * @param {string} language_code
+     * @param {boolean} traverture_enabled
      */
-    constructor(language_code) {
+    constructor(language_code, traverture_enabled) {
         const ptr0 = passStringToWasm0(language_code, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.inrefensengine_new(ptr0, len0);
+        const ret = wasm.inrefensengine_new(ptr0, len0, traverture_enabled);
         if (ret[2]) {
             throw takeFromExternrefTable0(ret[1]);
         }
