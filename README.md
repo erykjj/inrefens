@@ -15,21 +15,16 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 ## Features
 
 - **Automatic citation detection** – Publication citations are automatically detected in both Reading View and Live Preview (Edit mode), and updated as you type. Recognized roots include *The Watchtower* (`w`, `ws`, `wp`), *Awake!* (`g`), *Kingdom Ministry* (`km`), *Meeting Workbook* (`mwb`), *Insight on the Scriptures* (`it-1`, `it-2`), and hundreds of books, brochures, tracts, and online article series
-
 - **Interactive links** – Every detected citation becomes a clickable link. Clicking opens the result of the search for the citation on [*wol.jw.org*](https://wol.jw.org)
-
 - **Flexible citation forms** – Accepts a wide range of user-written variants:
   - Glued or separated years: `w15 2/15`, `w 15 2/15`, `w2015 2/15`, `w 4/2026`
   - Month/day in either order: `w15 2/15`, `w15 15/2`
   - Optional page ranges: `w26.4 12-15`, `be 30-32`
   - Hyphenated or non-hyphenated roots: `it-1 450`, `it1 450`
   - Titles in reference works: `it-1 Abraham`, `it-1 "Abraham"`
-
 - **Multi-language support** – Links open in your chosen language on *wol.jw.org*.
   - Supported languages: ASL, Cebuano, Chinese (Simplified Mandarin), Danish, Dutch, English, Estonian, Finnish, French, German, Haitian Creole, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil and Portugal), Romanian, Russian, Spanish, Swedish, Tagalog, Ukrainian
-
 - **Configurable link color** – Choose from presets or enter a custom hex value; changing the color requires restarting Obsidian
-
 - **Desktop and mobile support**
 
 ![preview](inREFens.gif)
@@ -46,11 +41,9 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 ## Known Limitations
 
 - In Edit mode, a citation that includes markup (e.g. `*wp16.5* 13`) renders as adjacent links rather than one link (Obsidian limitation); however, each link contains the URL for the whole citation
-
 - A bare `it` (without `-1` or `-2`) is not linked; *Insight on the Scriptures* has two volumes, and the volume must be specified to disambiguate; otherwise, the root would be too open to false positives (e.g. "it 'a house'")
-
 - Straight single quotes (`'...'`) are not accepted as title delimiters for `it-1` and `it-2` citations; use straight double quotes (`"Eliab"`), curly quotes (`“Eliab”` or `‘Eliab’`), or guillemets (`«Eliab»`)
-
+- When the [tra.VER:ture](https://github.com/erykjj/traverture) [plugin](https://community.obsidian.md/plugins/traverture) is also enabled, publication abbreviations that collide with Bible-book abbreviations (e.g. `re`, `pr`, `le`) do not auto-link; use `*** re 21 ***` (lowercase, and the root must come right after the opening `***`) to link one
 - If you encounter a publication root that doesn't link, please [open an issue](https://github.com/erykjj/inrefens/issues)
 
 ---
