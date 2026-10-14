@@ -6,15 +6,18 @@
 
 ### Changed
 
-- Check if tra.VER:ture is enabled
-- Updated engine to v4.0.0
-  - Avoid potential conflicts with tra.VER:ture (e.g. "Re 22:1" being linked by both)
-
 ### Fixed
 
 ### Removed
 
 ____
+## 3.3.0 - 2026-10-14
+### Changed
+
+- Check if tra.VER:ture is enabled
+- Updated engine to v4.0.0
+  - Avoid potential conflicts with tra.VER:ture (e.g. "Re 22:1" being linked by both)
+
 ## 3.2.0 - 2026-10-08
 ### Changed
 
@@ -70,6 +73,7 @@ ____
 - Initial *beta* release
 
 ____
+[3.3.0]:https://github.com/erykjj/inrefens/releases/tag/3.3.0
 [3.2.0]:https://github.com/erykjj/inrefens/releases/tag/3.2.0
 [3.1.0]:https://github.com/erykjj/inrefens/releases/tag/3.1.0
 [3.0.1]:https://github.com/erykjj/inrefens/releases/tag/3.0.1
