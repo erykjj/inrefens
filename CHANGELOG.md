@@ -16,7 +16,7 @@ ____
 
 - Check if tra.VER:ture is enabled
 - Updated engine to v4.0.0
-  - Avoid potential conflicts with tra.VER:ture (e.g. "Re 22:1" being linked by both)
+  - Avoid potential conflicts with tra.VER:ture (e.g. `Re 22:1` being linked by both)
 
 ## 3.2.0 - 2026-10-08
 ### Changed
