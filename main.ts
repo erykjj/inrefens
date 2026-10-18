@@ -1,6 +1,6 @@
 // main.ts
 
-import { Plugin, MarkdownView } from 'obsidian';
+import { Notice, Plugin, MarkdownView } from 'obsidian';
 import { createInrefensEditorPlugin, requestInrefensFullRescan } from './editor';
 import { initEngine, isEngineReady, resetEngine, buildWolUrl } from './engine-wrapper';
 import { processElement } from './post-processor';
@@ -76,7 +76,8 @@ export default class InrefensPlugin extends Plugin {
         try {
             await initEngine(this.app, this.settings.language);
         } catch (e) {
-            console.error('in(REF)ens: engine initialization failed:', e);
+            console.error('in(REF)ens: Failed to initialize engine:', e);
+            new Notice('in(REF)ens: Failed to initialize engine.');
         }
 
         this.addSettingTab(new InrefensSettingTab(this.app, this));
