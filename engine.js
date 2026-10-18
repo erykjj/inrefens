@@ -159,26 +159,18 @@ export class InrefensEngine {
     /**
      * @param {string} language_code
      * @param {boolean} traverture_enabled
+     * @param {number} engine_id
      */
-    constructor(language_code, traverture_enabled) {
+    constructor(language_code, traverture_enabled, engine_id) {
         const ptr0 = passStringToWasm0(language_code, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.inrefensengine_new(ptr0, len0, traverture_enabled);
+        const ret = wasm.inrefensengine_new(ptr0, len0, traverture_enabled, engine_id);
         if (ret[2]) {
             throw takeFromExternrefTable0(ret[1]);
         }
         this.__wbg_ptr = ret[0];
         InrefensEngineFinalization.register(this, this.__wbg_ptr, this);
         return this;
-    }
-    /**
-     * Verify the integrity hash of the surrounding plugin code.
-     * @param {number} hash
-     * @returns {boolean}
-     */
-    verify_integrity(hash) {
-        const ret = wasm.inrefensengine_verify_integrity(this.__wbg_ptr, hash);
-        return ret !== 0;
     }
 }
 if (Symbol.dispose) InrefensEngine.prototype[Symbol.dispose] = InrefensEngine.prototype.free;
