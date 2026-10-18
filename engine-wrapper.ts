@@ -1,10 +1,9 @@
 // engine-wrapper.ts
 
-import { App } from 'obsidian';
-// @ts-expect-error
+// @ts-ignore
 import * as wasmModuleUntyped from './engine.js';
-// @ts-expect-error
 import wasmBinary from './engine_bg.wasm';
+import { App } from 'obsidian';
 import { Citation, InrefensEngineInstance, InrefensEngineModule, LanguageInfo } from './types';
 
 const WASM_START = '/*WASM-START*/';
