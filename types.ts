@@ -8,14 +8,13 @@ export interface InrefensEngineInstance {
     find_citations(text: string): string;
     get_language_info(): string;
     get_language_code(): string;
-    verify_integrity(hash: number): boolean;
     build_delimited_url(text: string): string;
     get_delimited_query(text: string): string;
     build_wol_url_for_query(query: string): string;
 }
 
 export interface InrefensEngineStatic {
-    new(languageCode: string, travertureEnabled: boolean): InrefensEngineInstance;
+    new(languageCode: string, travertureEnabled: boolean, engineId: number): InrefensEngineInstance;
     get_available_languages(): string;
     get_version(): string;
     default(options: { module_or_path: unknown }): Promise<void>;

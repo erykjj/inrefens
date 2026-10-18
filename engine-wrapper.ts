@@ -7,48 +7,16 @@ import * as wasmModuleUntyped from './engine.js';
 import wasmBinary from './engine_bg.wasm';
 import { Citation, InrefensEngineInstance, InrefensEngineModule, LanguageInfo } from './types';
 
+const WASM_START = '/*WASM-START*/';
+const WASM_END = '/*WASM-END*/';
+const H_START = 2166136261;
+const H_END = 16777619;
 const wasmModule = wasmModuleUntyped as unknown as InrefensEngineModule;
 
 let engineInitialized = false;
 let engineInstance: InrefensEngineInstance | null = null;
 let cachedLanguages: LanguageInfo[] | null = null;
-
-// ──────────────────────────────────────────────
-// Integrity check
-// ──────────────────────────────────────────────
-
-function fnv1a(text: string): number {
-    const FNV_OFFSET = 2166136261;
-    const FNV_PRIME = 16777619;
-    let hash = FNV_OFFSET;
-    for (let i = 0; i < text.length; i++) {
-        hash ^= text.charCodeAt(i);
-        hash = Math.imul(hash, FNV_PRIME) >>> 0;
-    }
-    return hash >>> 0;
-}
-
-function findOccurrence(text: string, marker: string): number {
-    const first = text.indexOf(marker);
-    if (first === -1) return -1;
-    return text.indexOf(marker, first + 1);
-}
-
-async function checkHealth(app: App): Promise<number> {
-    const adapter = app.vault.adapter;
-    const configDir = app.vault.configDir;
-    const mainJsPath = `${configDir}/plugins/inrefens/main.js`;
-    const mainJsContent = await adapter.read(mainJsPath);
-    const startMarker = '.PluginSettingTab {';
-    const hashLength = 5000;
-    const startPos = findOccurrence(mainJsContent, startMarker);
-    if (startPos === -1) {
-        throw new Error('in(REF)ens: integrity check FAILED!');
-    }
-    const integritySection = mainJsContent.substring(startPos, startPos + hashLength);
-    const normalized = integritySection.replace(/\s+/g, '');
-    return fnv1a(normalized);
-}
+let engineId = 0;
 
 // ──────────────────────────────────────────────
 // Initialization
@@ -57,16 +25,31 @@ async function checkHealth(app: App): Promise<number> {
 export async function initEngine(app: App, language: string): Promise<void> {
     if (engineInitialized) return;
 
-    const generatedHash = await checkHealth(app);
-    await wasmModule.default({ module_or_path: wasmBinary });
+    const configDir = app.vault.configDir;
+    const mainJsText = await app.vault.adapter.read(`${configDir}/plugins/inrefens/main.js`);
+
+    const wsIdx = mainJsText.indexOf(WASM_START);
+    if (wsIdx === -1) throw new Error('engine: WASM-START marker not found');
+    const weIdx = mainJsText.indexOf(WASM_END, wsIdx);
+    if (weIdx === -1) throw new Error('engine: WASM-END marker not found');
+    const stripped = mainJsText.slice(0, wsIdx) + mainJsText.slice(weIdx + WASM_END.length);
+    const bytes = new TextEncoder().encode(stripped);
+    let h = H_START;
+    for (let i = 0; i < bytes.length; i++) {
+        h ^= bytes[i];
+        h = Math.imul(h, H_END) >>> 0;
+    }
+    engineId = h >>> 0;
+
+    const payload = wasmBinary.slice(
+        wasmBinary.indexOf(WASM_START) + WASM_START.length,
+        wasmBinary.indexOf(WASM_END)
+    );
+    const wasmBin = Uint8Array.from(atob(payload), c => c.charCodeAt(0));
+    await wasmModule.default({ module_or_path: wasmBin });
 
     const travertureEnabled = isPluginEnabled(app, 'traverture');
-    const instance = new wasmModule.InrefensEngine(language, travertureEnabled);
-    if (!instance.verify_integrity(generatedHash)) {
-        throw new Error('in(REF)ens: integrity check FAILED!');
-    }
-
-    engineInstance = instance;
+    engineInstance = new wasmModule.InrefensEngine(language, travertureEnabled, engineId);
     engineInitialized = true;
 }
 
