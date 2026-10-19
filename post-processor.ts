@@ -5,7 +5,11 @@ import { Citation } from './types';
 
 export function processElement(el: HTMLElement): void {
     if (isInsideAnchor(el)) return;
-    if (el.querySelector('.callout, svg')) return;
+    if (el.querySelector('.callout')) return;
+    const hasRealSvg = [...el.querySelectorAll('svg')].some(
+        svg => !svg.closest('.list-bullet')
+    );
+    if (hasRealSvg && !el.querySelector('h1, h2, h3, h4, h5, h6, ul, ol')) return;
     if (el.classList.contains('inrefens-processed')) return;
     el.classList.add('inrefens-processed');
     handleDelimitedElements(el);
