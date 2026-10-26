@@ -10,6 +10,10 @@ A publication citation parser and linker for Obsidian. Find references to public
 
 See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=security-ov-file) for information on what this plugin does and does not do behind the scenes.
 
+<mark>**Note on third-party forks**</mark>
+
+**This repository is the official source for in(REF)ens**. This project is MIT-licensed, so forking is permitted. Beware that unofficial forks and repackaged versions exist that add functionality, modify behavior, or change the plugin's scope. Those versions are not reviewed, endorsed, or supported by me, and *I cannot vouch for what they do with your data or your vault*.
+
 ---
 
 ## Features
