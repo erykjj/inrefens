@@ -69,10 +69,11 @@ export async function initEngine(app: App, language: string): Promise<void> {
     }
     engineId = h >>> 0;
 
-    const payload = wasmBinary.slice(
-        wasmBinary.indexOf(WASM_START) + WASM_START.length,
-        wasmBinary.indexOf(WASM_END)
-    );
+    const wasmStartIdx = wasmBinary.indexOf(WASM_START);
+    if (wasmStartIdx === -1) throw new Error('engine: WASM-START marker not found in binary');
+    const wasmEndIdx = wasmBinary.indexOf(WASM_END, wasmStartIdx);
+    if (wasmEndIdx === -1) throw new Error('engine: WASM-END marker not found in binary');
+    const payload = wasmBinary.slice(wasmStartIdx + WASM_START.length, wasmEndIdx);
     const wasmBin = Uint8Array.from(atob(payload), c => c.charCodeAt(0));
     await wasmModule.default({ module_or_path: wasmBin });
 
