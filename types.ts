@@ -73,11 +73,9 @@ export interface LanguageInfo {
 export interface InrefensSettings {
     language: string;
     linkColor: string;
-    autoLink: boolean;
 }
 
 export const DEFAULT_SETTINGS: InrefensSettings = {
     language: 'en',
     linkColor: '',
-    autoLink: true,
 };
