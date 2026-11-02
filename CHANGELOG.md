@@ -5,6 +5,9 @@
 ### Added
 
 ### Changed
+- Updated engine to v5.0.0
+  - Fix handling comma-separated pages
+  - Various other tweaks and improvements
 
 ### Fixed
 
@@ -15,6 +18,7 @@ ____
 ### Changed
 - Updated engine to v4.0.0
   - Various tweaks and improvements
+
 ### Fixed
 
 - Fixed parsing inside bullets and headings
