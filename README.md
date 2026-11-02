@@ -23,7 +23,8 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 - **Flexible citation forms** – Accepts a wide range of user-written variants:
   - Glued or separated years: `w15 2/15`, `w 15 2/15`, `w2015 2/15`, `w 4/2026`
   - Month/day in either order: `w15 2/15`, `w15 15/2`
-  - Optional page ranges: `w26.4 12-15`, `be 30-32`
+  - Optional page ranges or lists: `w26.4 12-15`, `be 30-32`, `cl 166, 167`
+  - Flexible paragraph introducers: `¶`, `/`, or a space can all introduce a paragraph reference — `cl 166 ¶22`, `cl 166/22`, and `cl 166 22` are equivalent
   - Hyphenated or non-hyphenated roots: `it-1 450`, `it1 450`
   - Titles in reference works: `it-1 Abraham`, `it-1 "Abraham"`
 - **Multi-language support** – Links open in your chosen language on *wol.jw.org*.
@@ -45,6 +46,7 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 ## Known Limitations
 
 - In Edit mode, a citation that includes markup (e.g. `*wp16.5* 13`) renders as adjacent links rather than one link (Obsidian limitation); however, each link contains the URL for the whole citation
+- Paragraph references accept a single number or a range (`cl 166 ¶22`, `cl 166 ¶22-24`); comma lists are not supported for paragraphs: the second number after a comma is interpreted as a separate page reference, not a second paragraph
 - A bare `it` (without `-1` or `-2`) is not linked; *Insight on the Scriptures* has two volumes, and the volume must be specified to disambiguate; otherwise, the root would be too open to false positives (e.g. "it 'a house'")
 - Straight single quotes (`'...'`) are not accepted as title delimiters for `it-1` and `it-2` citations; use straight double quotes (`"Eliab"`), curly quotes (`“Eliab”` or `‘Eliab’`), or guillemets (`«Eliab»`)
 - When the [tra.VER:ture](https://github.com/erykjj/traverture) [plugin](https://community.obsidian.md/plugins/traverture) is also enabled, publication abbreviations that collide with Bible-book abbreviations (e.g. `re`, `pr`, `le`) do not auto-link; use `*** re 21 ***` (lowercase, and the root must come right after the opening `***`) to link one
