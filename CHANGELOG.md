@@ -5,15 +5,18 @@
 ### Added
 
 ### Changed
-- Updated engine to v5.0.0
-  - Fix handling comma-separated pages
-  - Various other tweaks and improvements
 
 ### Fixed
 
 ### Removed
 
 ____
+## 5.0.0 - 2026-11-01
+### Changed
+- Updated engine to v5.0.0
+  - Fix handling comma-separated pages
+- Various other tweaks and improvements
+
 ## 4.1.0 - 2026-10-20
 ### Changed
 - Updated engine to v4.0.0
@@ -90,6 +93,7 @@ ____
 - Initial *beta* release
 
 ____
+[5.0.0]:https://github.com/erykjj/inrefens/releases/tag/5.0.0
 [4.1.0]:https://github.com/erykjj/inrefens/releases/tag/4.1.0
 [4.0.1]:https://github.com/erykjj/inrefens/releases/tag/4.0.1
 [3.3.0]:https://github.com/erykjj/inrefens/releases/tag/3.3.0
