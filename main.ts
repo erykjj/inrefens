@@ -23,8 +23,8 @@ export default class InrefensPlugin extends Plugin {
         resetEngine();
         try {
             await initEngine(this.app, this.settings.language);
-        } catch (e) {
-            console.error('in(REF)ens: engine re-initialization failed:', e);
+        } catch {
+            console.error('in(REF)ens: engine re-initialization failed:');
             return;
         }
         this.refreshReadingViewLinks();
@@ -75,8 +75,8 @@ export default class InrefensPlugin extends Plugin {
 
         try {
             await initEngine(this.app, this.settings.language);
-        } catch (e) {
-            console.error('in(REF)ens: Failed to initialize engine:', e);
+        } catch {
+            console.error('in(REF)ens: Failed to initialize engine:');
             new Notice('in(REF)ens: Failed to initialize engine.');
         }
 
