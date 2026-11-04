@@ -6,15 +6,19 @@
 
 ### Changed
 
+### Fixed
+
+### Removed
+
+____
+## 5.1.0 - 2026-11-04
+
 - Optimize startup
 
 ### Fixed
 
 - Various small tweaks and fixes
 
-### Removed
-
-____
 ## 5.0.0 - 2026-11-01
 ### Changed
 - Updated engine to v5.0.0
@@ -97,6 +101,7 @@ ____
 - Initial *beta* release
 
 ____
+[5.1.0]:https://github.com/erykjj/inrefens/releases/tag/5.1.0
 [5.0.0]:https://github.com/erykjj/inrefens/releases/tag/5.0.0
 [4.1.0]:https://github.com/erykjj/inrefens/releases/tag/4.1.0
 [4.0.1]:https://github.com/erykjj/inrefens/releases/tag/4.0.1
