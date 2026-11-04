@@ -6,7 +6,11 @@
 
 ### Changed
 
+- Optimize startup
+
 ### Fixed
+
+- Various small tweaks and fixes
 
 ### Removed
 
