@@ -12,6 +12,7 @@ export default class InrefensPlugin extends Plugin {
 
     private bootstrapPromise: Promise<void> = Promise.resolve();
     private unloaded = false;
+    private settingTab: InrefensSettingTab | null = null;
 
     async loadSettings() {
         const saved = await this.loadData() as Partial<InrefensSettings> | null;
@@ -41,6 +42,9 @@ export default class InrefensPlugin extends Plugin {
                 console.warn('in(REF)ens: engine not ready after initialization');
                 return;
             }
+            // Fill the language dropdown now that the engine can list languages
+            this.settingTab?.refreshLanguages();
+            // Retroactively process content that was open before the engine existed
             this.refreshReadingViewLinks();
             this.reprocessReadingViews();
             this.refreshEditorDecorations();
@@ -114,7 +118,8 @@ export default class InrefensPlugin extends Plugin {
         await this.loadSettings();
         this.applyLinkColor();
 
-        this.addSettingTab(new InrefensSettingTab(this.app, this));
+        this.settingTab = new InrefensSettingTab(this.app, this);
+        this.addSettingTab(this.settingTab);
         this.registerEditorExtension(createInrefensEditorPlugin());
         this.registerMarkdownPostProcessor(processElement);
 

@@ -74,7 +74,11 @@ export async function initEngine(app: App, language: string): Promise<void> {
     const wasmEndIdx = wasmBinary.indexOf(WASM_END, wasmStartIdx);
     if (wasmEndIdx === -1) throw new Error('engine: WASM-END marker not found in binary');
     const payload = wasmBinary.slice(wasmStartIdx + WASM_START.length, wasmEndIdx);
-    const wasmBin = Uint8Array.from(atob(payload), c => c.charCodeAt(0));
+    const decoded = atob(payload);
+    const wasmBin = new Uint8Array(decoded.length);
+    for (let i = 0; i < decoded.length; i++) {
+        wasmBin[i] = decoded.charCodeAt(i);
+    }
     await wasmModule.default({ module_or_path: wasmBin });
 
     const travertureEnabled = isPluginEnabled(app, 'traverture');

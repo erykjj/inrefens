@@ -24,6 +24,20 @@ export class InrefensSettingTab extends PluginSettingTab {
         this.plugin = plugin;
     }
 
+    private langOptions: Record<string, string> = {};
+
+    refreshLanguages(): void {
+        const languages = getAvailableLanguagesCached()
+            .slice()
+            .sort((a, b) => a.language_name.localeCompare(b.language_name));
+        for (const key of Object.keys(this.langOptions)) {
+            delete this.langOptions[key];
+        }
+        for (const lang of languages) {
+            this.langOptions[lang.language_code] = `${lang.language_name} (${lang.language_code})`;
+        }
+    }
+
     async setControlValue(key: string, value: unknown): Promise<void> {
         const s = this.plugin.settings as unknown as Record<string, unknown>;
 
@@ -38,14 +52,8 @@ export class InrefensSettingTab extends PluginSettingTab {
     }
 
     getSettingDefinitions(): SettingDefinitionItem[] {
-        const languages = getAvailableLanguagesCached()
-            .slice()
-            .sort((a, b) => a.language_name.localeCompare(b.language_name));
-
-        const langOptions: Record<string, string> = {};
-        for (const lang of languages) {
-            langOptions[lang.language_code] = `${lang.language_name} (${lang.language_code})`;
-        }
+        this.refreshLanguages();
+        const langOptions = this.langOptions;
 
         return [
             // ─── Header section ───

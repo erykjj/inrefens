@@ -168,6 +168,8 @@ export function createInrefensEditorPlugin() {
                     add: newEntries.map(e => ({ from: e.from, to: e.to, value: e.deco })),
                     sort: true,
                 });
+
+                view.dispatch({});
             }
 
             update(update: ViewUpdate) {
