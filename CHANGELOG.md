@@ -11,7 +11,7 @@
 ### Removed
 
 ____
-## 5.1.0 - 2026-11-04
+## 5.1.1 - 2026-11-04
 
 - Optimize startup
 
@@ -101,7 +101,7 @@ ____
 - Initial *beta* release
 
 ____
-[5.1.0]:https://github.com/erykjj/inrefens/releases/tag/5.1.0
+[5.1.1]:https://github.com/erykjj/inrefens/releases/tag/5.1.1
 [5.0.0]:https://github.com/erykjj/inrefens/releases/tag/5.0.0
 [4.1.0]:https://github.com/erykjj/inrefens/releases/tag/4.1.0
 [4.0.1]:https://github.com/erykjj/inrefens/releases/tag/4.0.1
