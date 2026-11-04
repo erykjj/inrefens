@@ -161,7 +161,7 @@ function getAvailableLanguages(): LanguageInfo[] {
 }
 
 export function getAvailableLanguagesCached(): LanguageInfo[] {
-    if (!cachedLanguages) {
+    if (!cachedLanguages || cachedLanguages.length === 0) {
         cachedLanguages = getAvailableLanguages();
     }
     return cachedLanguages;
