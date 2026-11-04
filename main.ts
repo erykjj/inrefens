@@ -42,9 +42,7 @@ export default class InrefensPlugin extends Plugin {
                 console.warn('in(REF)ens: engine not ready after initialization');
                 return;
             }
-            // Fill the language dropdown now that the engine can list languages
             this.settingTab?.refreshLanguages();
-            // Retroactively process content that was open before the engine existed
             this.refreshReadingViewLinks();
             this.reprocessReadingViews();
             this.refreshEditorDecorations();
@@ -58,16 +56,12 @@ export default class InrefensPlugin extends Plugin {
 
     private refreshEditorDecorations(): void {
         requestInrefensFullRescan();
-        let leaves = 0;
-        let withCm = 0;
         this.app.workspace.iterateAllLeaves(leaf => {
             const view = leaf.view;
             if (!(view instanceof MarkdownView)) return;
-            leaves++;
             const editorView = (view.editor as unknown as { cm?: unknown }).cm;
             const cmView = editorView as { dispatch?: (spec: unknown) => void } | undefined;
             if (cmView?.dispatch) {
-                withCm++;
                 cmView.dispatch({});
             }
         });
