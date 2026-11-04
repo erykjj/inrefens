@@ -102,7 +102,21 @@ export class InrefensSettingTab extends PluginSettingTab {
                             const isPreset = LINK_COLOR_OPTIONS.some(o => o.value === savedColor);
                             const dropdownValue = isPreset ? savedColor : 'custom';
 
+                            const HEX_COLOR_RE = /^#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i;
+                            const isValidColor = (value: string): boolean => HEX_COLOR_RE.test(value);
+
                             let customTextEl: HTMLInputElement | null = null;
+
+                            const setCustomError = (invalid: boolean): void => {
+                                if (!customTextEl) return;
+                                if (invalid) {
+                                    customTextEl.addClass('inrefens-invalid');
+                                    customTextEl.setAttribute('aria-invalid', 'true');
+                                } else {
+                                    customTextEl.removeClass('inrefens-invalid');
+                                    customTextEl.removeAttribute('aria-invalid');
+                                }
+                            };
 
                             setting
                                 .addDropdown(dropdown => {
@@ -113,31 +127,46 @@ export class InrefensSettingTab extends PluginSettingTab {
                                         .setValue(dropdownValue)
                                         .onChange(async (value) => {
                                             if (value === 'custom') {
-                                                this.plugin.settings.linkColor = this.plugin.settings.linkColor || '';
+                                                this.plugin.settings.linkColor =
+                                                    this.plugin.settings.linkColor || '';
+                                                if (customTextEl) {
+                                                    customTextEl.removeClass('inrefens-hidden');
+                                                    const current = customTextEl.value.trim();
+                                                    setCustomError(current !== '' && !isValidColor(current));
+                                                }
                                             } else {
                                                 this.plugin.settings.linkColor = value;
+                                                if (customTextEl) {
+                                                    customTextEl.addClass('inrefens-hidden');
+                                                    setCustomError(false);
+                                                }
                                             }
                                             await this.plugin.saveSettings();
                                             this.plugin.applyLinkColor();
-                                            if (customTextEl) {
-                                                if (value === 'custom') {
-                                                    customTextEl.removeClass('inrefens-hidden');
-                                                } else {
-                                                    customTextEl.addClass('inrefens-hidden');
-                                                }
-                                            }
                                         });
                                 })
                                 .addText(text => {
                                     customTextEl = text.inputEl;
                                     text.inputEl.placeholder = '#4a6da7';
                                     text.setValue(isPreset ? '' : savedColor);
-                                    text.setDisabled(!isPreset && dropdownValue !== 'custom');
                                     if (dropdownValue !== 'custom') {
                                         text.inputEl.addClass('inrefens-hidden');
                                     }
+                                    setCustomError(!isPreset && savedColor !== '' && !isValidColor(savedColor));
+
                                     text.onChange(async (value) => {
-                                        this.plugin.settings.linkColor = value.trim();
+                                        const trimmed = value.trim();
+                                        if (trimmed === '' || !isValidColor(trimmed)) {
+                                            setCustomError(trimmed !== '');
+                                            if (trimmed === '') {
+                                                this.plugin.settings.linkColor = '';
+                                                await this.plugin.saveSettings();
+                                                this.plugin.applyLinkColor();
+                                            }
+                                            return;
+                                        }
+                                        setCustomError(false);
+                                        this.plugin.settings.linkColor = trimmed;
                                         await this.plugin.saveSettings();
                                         this.plugin.applyLinkColor();
                                     });
