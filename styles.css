@@ -10,6 +10,11 @@
   display: none;
 }
 
+.inrefens-invalid {
+    border-color: var(--text-error);
+    box-shadow: 0 0 0 1px var(--text-error);
+}
+
 /* ────────────────────────────────────────────── */
 /* Citation links                                 */
 /* ────────────────────────────────────────────── */
