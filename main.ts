@@ -10,6 +10,9 @@ import { DEFAULT_SETTINGS, InrefensSettings } from './types';
 export default class InrefensPlugin extends Plugin {
     settings: InrefensSettings = DEFAULT_SETTINGS;
 
+    private bootstrapPromise: Promise<void> = Promise.resolve();
+    private unloaded = false;
+
     async loadSettings() {
         const saved = await this.loadData() as Partial<InrefensSettings> | null;
         this.settings = Object.assign({}, DEFAULT_SETTINGS, saved);
@@ -19,26 +22,48 @@ export default class InrefensPlugin extends Plugin {
         await this.saveData(this.settings);
     }
 
+    private queueEngineInit(reset: boolean, notify: boolean): Promise<void> {
+        this.bootstrapPromise = this.bootstrapPromise.then(async () => {
+            if (this.unloaded) return;
+            if (reset) resetEngine();
+            try {
+                await initEngine(this.app, this.settings.language);
+            } catch (e) {
+                console.error('in(REF)ens: engine initialization failed:', e);
+                if (notify) new Notice('in(REF)ens: Failed to initialize engine.');
+                return;
+            }
+            if (this.unloaded) {
+                resetEngine();
+                return;
+            }
+            if (!isEngineReady()) {
+                console.warn('in(REF)ens: engine not ready after initialization');
+                return;
+            }
+            this.refreshReadingViewLinks();
+            this.reprocessReadingViews();
+            this.refreshEditorDecorations();
+        });
+        return this.bootstrapPromise;
+    }
+
     async reloadEngine(): Promise<void> {
-        resetEngine();
-        try {
-            await initEngine(this.app, this.settings.language);
-        } catch {
-            console.error('in(REF)ens: engine re-initialization failed:');
-            return;
-        }
-        this.refreshReadingViewLinks();
-        this.refreshEditorDecorations();
+        await this.queueEngineInit(true, false);
     }
 
     private refreshEditorDecorations(): void {
         requestInrefensFullRescan();
+        let leaves = 0;
+        let withCm = 0;
         this.app.workspace.iterateAllLeaves(leaf => {
             const view = leaf.view;
             if (!(view instanceof MarkdownView)) return;
+            leaves++;
             const editorView = (view.editor as unknown as { cm?: unknown }).cm;
             const cmView = editorView as { dispatch?: (spec: unknown) => void } | undefined;
             if (cmView?.dispatch) {
+                withCm++;
                 cmView.dispatch({});
             }
         });
@@ -59,6 +84,22 @@ export default class InrefensPlugin extends Plugin {
         });
     }
 
+    private reprocessReadingViews(): void {
+        this.app.workspace.iterateAllLeaves(leaf => {
+            const container = leaf.view.containerEl;
+            if (!container) return;
+            const processed = Array.from(container.querySelectorAll('.inrefens-processed'));
+            for (const el of processed) {
+                el.classList.remove('inrefens-processed');
+            }
+            for (const el of processed) {
+                if (el.instanceOf(HTMLElement)) {
+                    processElement(el);
+                }
+            }
+        });
+    }
+
     applyLinkColor(): void {
         const color = this.settings.linkColor;
         const root = activeDocument.documentElement;
@@ -73,23 +114,17 @@ export default class InrefensPlugin extends Plugin {
         await this.loadSettings();
         this.applyLinkColor();
 
-        try {
-            await initEngine(this.app, this.settings.language);
-        } catch {
-            console.error('in(REF)ens: Failed to initialize engine:');
-            new Notice('in(REF)ens: Failed to initialize engine.');
-        }
-
         this.addSettingTab(new InrefensSettingTab(this.app, this));
         this.registerEditorExtension(createInrefensEditorPlugin());
         this.registerMarkdownPostProcessor(processElement);
 
-        if (!isEngineReady()) {
-            console.warn('in(REF)ens: engine not ready!');
-        }
+        this.app.workspace.onLayoutReady(() => {
+            void this.queueEngineInit(false, true);
+        });
     }
 
     onunload() {
-        resetEngine();
+        this.unloaded = true;
+        void this.bootstrapPromise.then(() => resetEngine());
     }
 }

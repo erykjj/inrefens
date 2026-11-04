@@ -11,10 +11,10 @@ const DEBOUNCE_MS = 150;
 const VIEWPORT_DEBOUNCE_MS = 75;
 const MAX_RESCAN_BYTES = 4096;
 
-let fullRescanRequested = false;
+let fullRescanGeneration = 0;
 
 export function requestInrefensFullRescan(): void {
-    fullRescanRequested = true;
+    fullRescanGeneration++;
 }
 
 interface DecoEntry {
@@ -125,6 +125,7 @@ export function createInrefensEditorPlugin() {
             private debounceTimer: number | null = null;
             private viewportTimer: number | null = null;
             private pendingTarget: RescanTarget | null = null;
+            private seenRescanGeneration = fullRescanGeneration;
 
             constructor(view: EditorView) {
                 this.decorations = buildDecorationsForVisibleRanges(view);
@@ -147,6 +148,8 @@ export function createInrefensEditorPlugin() {
             private applyRescan(view: EditorView, target: RescanTarget | null) {
                 if (!target || target.full) {
                     this.decorations = buildDecorationsForVisibleRanges(view);
+                    view.dispatch({});
+                    view.requestMeasure();
                     return;
                 }
 
@@ -168,8 +171,8 @@ export function createInrefensEditorPlugin() {
             }
 
             update(update: ViewUpdate) {
-                if (fullRescanRequested) {
-                    fullRescanRequested = false;
+                if (this.seenRescanGeneration !== fullRescanGeneration) {
+                    this.seenRescanGeneration = fullRescanGeneration;
                     this.pendingTarget = { from: 0, to: 0, full: true };
                     this.scheduleRescan(update.view, this.pendingTarget, 0);
                     return;
