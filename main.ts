@@ -59,11 +59,8 @@ export default class InrefensPlugin extends Plugin {
         this.app.workspace.iterateAllLeaves(leaf => {
             const view = leaf.view;
             if (!(view instanceof MarkdownView)) return;
-            const editorView = (view.editor as unknown as { cm?: unknown }).cm;
-            const cmView = editorView as { dispatch?: (spec: unknown) => void } | undefined;
-            if (cmView?.dispatch) {
-                cmView.dispatch({});
-            }
+            const cm = (view.editor as unknown as { cm?: { dispatch?: (spec: unknown) => void } }).cm;
+            cm?.dispatch?.({});
         });
     }
 

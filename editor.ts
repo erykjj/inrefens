@@ -46,7 +46,10 @@ function decorationsForRange(
             to: docTo,
             deco: Decoration.mark({
                 class: 'inrefens-link',
-                attributes: { 'data-inrefens-query': query },
+                attributes: {
+                    'data-inrefens-query': query,
+                    'data-inrefens-url': citation.wol_url || '',
+                },
             }),
         });
     }
@@ -225,9 +228,9 @@ export function createInrefensEditorPlugin() {
                     const target = e.target as HTMLElement;
                     const linkEl = target.closest('.inrefens-link');
                     if (!linkEl) return;
+                    const cachedUrl = linkEl.getAttribute('data-inrefens-url');
                     const query = linkEl.getAttribute('data-inrefens-query');
-                    if (!query) return;
-                    const url = buildWolUrl(query);
+                    const url = cachedUrl || (query ? buildWolUrl(query) : '');
                     if (!url) return;
                     e.preventDefault();
                     e.stopPropagation();
