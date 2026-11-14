@@ -115,7 +115,9 @@ export default class InrefensPlugin extends Plugin {
         this.registerMarkdownPostProcessor(processElement);
 
         this.app.workspace.onLayoutReady(() => {
-            void this.queueEngineInit(false, true);
+            window.setTimeout(() => {
+                void this.queueEngineInit(false, true);
+            }, 0);
         });
     }
 
