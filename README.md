@@ -49,7 +49,10 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 - Paragraph references accept a single number or a range (`cl 166 ¶22`, `cl 166 ¶22-24`); comma lists are not supported for paragraphs: the second number after a comma is interpreted as a separate page reference, not a second paragraph
 - A bare `it` (without `-1` or `-2`) is not linked; *Insight on the Scriptures* has two volumes, and the volume must be specified to disambiguate; otherwise, the root would be too open to false positives (e.g. "it 'a house'")
 - Straight single quotes (`'...'`) are not accepted as title delimiters for `it-1` and `it-2` citations; use straight double quotes (`"Eliab"`), curly quotes (`“Eliab”` or `‘Eliab’`), or guillemets (`«Eliab»`)
-- When the [tra.VER:ture](https://github.com/erykjj/traverture) [plugin](https://community.obsidian.md/plugins/traverture) is also enabled, publication abbreviations that collide with Bible-book abbreviations (e.g. `re`, `pr`, `le`) do not auto-link; use `*** re 21 ***` (lowercase, and the root must come right after the opening `***`) to link one
+- Publication roots are **case-sensitive**, so write them in their canonical form (`w15 2/15`, not `W15 2/15`); this is deliberate: it lets in(REF)ens coexist with [tra.VER:ture](https://github.com/erykjj/traverture) without ambiguity; a root like `re` is a valid publication symbol in lowercase but also a Bible-book abbreviation in title case, so `Re 21` is left to tra.VER:ture as scripture, while `re 21` links here as a publication
+- When tra.VER:ture is also enabled, the two plugins divide forced blocks by convention:
+  - `{{ … }}` is tra.VER:ture's: in(REF)ens ignores anything inside it
+  - `*** … ***` is in(REF)ens's: in(REF)ens parses it as usual (case-sensitively); anything it can't parse (e.g. `*** Re 21 ***`, which is not a valid root in that casing — is left for tra.VER:ture to pick up as scripture if it can)
 - If you encounter a publication root that doesn't link, please [open an issue](https://github.com/erykjj/inrefens/issues)
 
 ---
