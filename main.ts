@@ -117,7 +117,7 @@ export default class InrefensPlugin extends Plugin {
         this.app.workspace.onLayoutReady(() => {
             window.setTimeout(() => {
                 void this.queueEngineInit(false, true);
-            }, 50);
+            }, 0);
         });
     }
 
