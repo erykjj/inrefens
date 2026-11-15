@@ -14,7 +14,7 @@ export interface InrefensEngineInstance {
 }
 
 export interface InrefensEngineStatic {
-    new(languageCode: string, travertureEnabled: boolean, engineId: number): InrefensEngineInstance;
+    new(languageCode: string, engineId: number): InrefensEngineInstance;
     get_available_languages(): string;
     get_version(): string;
     default(options: { module_or_path: unknown }): Promise<void>;

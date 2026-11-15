@@ -81,16 +81,8 @@ export async function initEngine(app: App, language: string): Promise<void> {
     }
     await wasmModule.default({ module_or_path: wasmBin });
 
-    const travertureEnabled = isPluginEnabled(app, 'traverture');
-    engineInstance = new wasmModule.InrefensEngine(language, travertureEnabled, engineId);
+    engineInstance = new wasmModule.InrefensEngine(language, engineId);
     engineInitialized = true;
-}
-
-function isPluginEnabled(app: App, pluginId: string): boolean {
-    const plugins = (app as unknown as {
-        plugins?: { enabledPlugins?: Set<string> };
-    }).plugins;
-    return plugins?.enabledPlugins?.has(pluginId) ?? false;
 }
 
 export function isEngineReady(): boolean {
