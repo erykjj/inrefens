@@ -95,19 +95,38 @@ export default class InrefensPlugin extends Plugin {
         });
     }
 
-    applyLinkColor(): void {
-        const color = this.settings.linkColor;
-        const root = activeDocument.documentElement;
-        if (color && color.trim() !== '') {
-            root.style.setProperty('--inrefens-link-color', color.trim());
+    private allDocuments(): Document[] {
+        const docs = new Set<Document>([document, activeDocument]);
+        this.app.workspace.iterateAllLeaves(leaf => {
+            docs.add(leaf.view.containerEl.ownerDocument);
+        });
+        return Array.from(docs);
+    }
+
+    private applyLinkColorTo(doc: Document): void {
+        const root = doc.documentElement;
+        const color = (this.settings.linkColor ?? '').trim();
+        if (color !== '') {
+            root.style.setProperty('--inrefens-link-color', color);
         } else {
             root.style.removeProperty('--inrefens-link-color');
         }
     }
 
+    applyLinkColor(): void {
+        for (const doc of this.allDocuments()) this.applyLinkColorTo(doc);
+    }
+
+    private registerLinkColor(): void {
+        this.applyLinkColor();
+        this.registerEvent(this.app.workspace.on('window-open', (_win, popoutWindow) => {
+            this.applyLinkColorTo(popoutWindow.document);
+        }));
+    }
+
     async onload() {
         await this.loadSettings();
-        this.applyLinkColor();
+        this.registerLinkColor();
 
         this.settingTab = new InrefensSettingTab(this.app, this);
         this.addSettingTab(this.settingTab);
