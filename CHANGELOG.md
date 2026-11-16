@@ -6,6 +6,10 @@
 
 ### Changed
 
+- Updated engine to v6.0.0
+  - Smoother co-existence with tra.VER:ture
+- Various fixes and improvements
+
 ### Fixed
 
 ### Removed
