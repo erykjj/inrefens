@@ -12,7 +12,7 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 
 <mark>**Note on third-party forks**</mark>
 
-**https://github.com/erykjj/inrefens is the official source for *in(REF)ens***. This project is MIT-licensed, so forking is permitted. Beware that unofficial forks and repackaged versions exist that add functionality, modify behavior, or change the plugin's scope. Those versions are not reviewed, endorsed, or supported by me, and *I cannot vouch for what they do with your data or your vault*.
+**https://github.com/erykjj/inrefens is the official source for in(REF)ens**. This project is MIT-licensed, so forking is permitted. Beware that unofficial forks and repackaged versions exist that add functionality, modify behavior, or change the plugin's scope. Those versions are not reviewed, endorsed, or supported by me, and *I cannot vouch for what they do with your data or your vault*.
 
 ---
 
@@ -49,10 +49,10 @@ See [the security and privacy notes](https://github.com/erykjj/inrefens?tab=secu
 - Paragraph references accept a single number or a range (`cl 166 ¶22`, `cl 166 ¶22-24`); comma lists are not supported for paragraphs: the second number after a comma is interpreted as a separate page reference, not a second paragraph
 - A bare `it` (without `-1` or `-2`) is not linked; *Insight on the Scriptures* has two volumes, and the volume must be specified to disambiguate; otherwise, the root would be too open to false positives (e.g. "it 'a house'")
 - Straight single quotes (`'...'`) are not accepted as title delimiters for `it-1` and `it-2` citations; use straight double quotes (`"Eliab"`), curly quotes (`“Eliab”` or `‘Eliab’`), or guillemets (`«Eliab»`)
-- Publication roots are **case-sensitive**, so write them in their canonical form (`w15 2/15`, not `W15 2/15`); this is deliberate: it lets *in(REF)ens* coexist with [*tra.VER:ture*](https://github.com/erykjj/traverture) without ambiguity; a root like `re` is a valid publication symbol in lowercase but also a Bible-book abbreviation in title case, so `Re 21` is left to *tra.VER:ture* as scripture, while `re 21` links here as a publication
-- When *tra.VER:ture* is also enabled, the two plugins divide forced blocks by convention:
-  - `{{ … }}` is *tra.VER:ture*'s: *in(REF)ens* ignores anything inside it
-  - `*** … ***` is *in(REF)ens*'s: *in(REF)ens* parses it as usual (case-sensitively); anything it can't parse (e.g. `*** Re 21 ***`, which is not a valid root in that casing — is left for *tra.VER:ture* to pick up as scripture if it can)
+- Publication roots are **case-sensitive**, so write them in their canonical form (`w15 2/15`, not `W15 2/15`); this is deliberate: it lets in(REF)ens coexist with [tra.VER:ture](https://github.com/erykjj/traverture) without ambiguity; a root like `re` is a valid publication symbol in lowercase but also a Bible-book abbreviation in title case, so `Re 21` is left to tra.VER:ture as scripture, while `re 21` links here as a publication
+- When tra.VER:ture is also enabled, the two plugins divide forced blocks by convention:
+  - `{{ … }}` is tra.VER:ture's: in(REF)ens ignores anything inside it
+  - `*** … ***` is in(REF)ens's: in(REF)ens parses it as usual (case-sensitively); anything it can't parse (e.g. `*** Re 21 ***`, which is not a valid root in that casing — is left for tra.VER:ture to pick up as scripture if it can)
 - If you encounter a publication root that doesn't link, please [open an issue](https://github.com/erykjj/inrefens/issues)
 
 ---
@@ -67,7 +67,7 @@ Detection runs on visible text only and is fast even on large documents. Changin
 
 1. In your vault's `.obsidian/plugins/` directory, make a directory (folder) called `inrefens`, if you don't already have one
 2. Download [main.js](https://github.com/erykjj/inrefens/releases/latest/download/main.js), [styles.css](https://github.com/erykjj/inrefens/releases/latest/download/styles.css), [manifest.json](https://github.com/erykjj/inrefens/releases/latest/download/manifest.json)
-3. If not already enabled, enable *in(REF)ens* in Obsidian Settings → Community plugins
+3. If not already enabled, enable `in(REF)ens` in Obsidian Settings → Community plugins
 4. Configure the language in the plugin settings (if installing for the first time); defaults to English
 
 ---
