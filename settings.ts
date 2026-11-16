@@ -96,7 +96,7 @@ export class InrefensSettingTab extends PluginSettingTab {
                     },
                     {
                         name: 'Link color',
-                        desc: 'Color for citation links. "Theme default" uses the vault\u2019s external-link color. Changing this requires restarting Obsidian.',
+                        desc: 'Color for citation links. "Theme default" uses the vault\u2019s external-link color.',
                         render: (setting) => {
                             const savedColor = this.plugin.settings.linkColor ?? '';
                             const isPreset = LINK_COLOR_OPTIONS.some(o => o.value === savedColor);
