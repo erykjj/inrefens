@@ -35,6 +35,7 @@ function handleDelimitedElements(el: HTMLElement): void {
         const parent = (node as HTMLElement).parentElement;
         if (!parent) return;
         if (parent.closest('.inrefens-link')) return;
+        if (parent.closest('a') || parent.querySelector('a')) return;
         candidates.push(parent);
     });
 
