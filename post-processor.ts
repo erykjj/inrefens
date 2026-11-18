@@ -212,9 +212,11 @@ function clipNode(source: Node, from: number, to: number): Node {
 
 function processInlineRuns(el: HTMLElement): void {
     for (const block of collectBlockElements(el)) {
+        if (isInsideAnchor(block)) continue;
         processBlockElement(block);
     }
 }
+
 
 function collectBlockElements(root: HTMLElement): HTMLElement[] {
     const out: HTMLElement[] = [];
@@ -273,7 +275,7 @@ function processTextNodes(el: HTMLElement): void {
         acceptNode: (node) => {
             const parent = node.parentElement;
             if (!parent) return NodeFilter.FILTER_REJECT;
-            if (parent.tagName === 'A') return NodeFilter.FILTER_REJECT;
+            if (parent.closest('a')) return NodeFilter.FILTER_REJECT;
             if (parent.tagName === 'CODE') return NodeFilter.FILTER_REJECT;
             if (parent.tagName === 'PRE') return NodeFilter.FILTER_REJECT;
             if (parent.closest('.inrefens-link')) return NodeFilter.FILTER_REJECT;
