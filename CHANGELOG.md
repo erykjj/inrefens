@@ -6,15 +6,18 @@
 
 ### Changed
 
-- Updated engine to v6.0.0
-  - Smoother co-existence with tra.VER:ture
-- Various fixes and improvements
-
 ### Fixed
 
 ### Removed
 
 ____
+## 6.0.0 - 2026-11-18
+### Changed
+
+- Updated engine to v6.0.0
+  - Smoother co-existence with tra.VER:ture
+- Various fixes and improvements
+
 ## 5.1.3 - 2026-11-14
 ### Changed
 
@@ -115,6 +118,7 @@ ____
 - Initial *beta* release
 
 ____
+[6.0.0]:https://github.com/erykjj/inrefens/releases/tag/6.0.0
 [5.1.3]:https://github.com/erykjj/inrefens/releases/tag/5.1.3
 [5.1.2]:https://github.com/erykjj/inrefens/releases/tag/5.1.2
 [5.1.1]:https://github.com/erykjj/inrefens/releases/tag/5.1.1
